@@ -16,6 +16,7 @@
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
+    "dotenv": "^6.2.0",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
     "joi": "^13.6.0",
@@ -24,7 +25,8 @@
     "mongoose": "^5.2.7",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -79,7 +81,14 @@
       "import/prefer-default-export": 0,
       "no-underscore-dangle": 0,
       "consistent-return": 0,
-      "linebreak-style": 0
+      "linebreak-style": 0,
+      "no-mutable-exports": 0,
+      "class-methods-use-this": 0,
+      "import/no-unresolved": 0,
+      "import/no-cycle": 0,
+      "no-plusplus": 0,
+      "camelcase": 0,
+      "prefer-destructuring": 0
     }
   }
 }

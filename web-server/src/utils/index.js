@@ -1,3 +1,3 @@
-import jwtSignUser from "./jwtSignUser";
+import secrets from "./secrets";
 
-export { jwtSignUser };
+export { secrets };

@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
@@ -7,9 +6,8 @@ import helmet from "helmet";
 import compression from "compression";
 import bodyParser from "body-parser";
 
-import config from "./config";
-import router from "./router";
-import "./utils/passport";
+import apiV1Routes from "./router/apiV1";
+import { secrets } from "./utils";
 
 const app = express();
 
@@ -26,27 +24,13 @@ app.use(helmet());
 app.use(compression());
 app.use(logger("dev"));
 app.use(bodyParser.json());
-
-router(app);
+app.use("/api/v1", apiV1Routes);
 
 /* listen to port */
-app.listen(config.PORT || 3030, () => {
-  if (config.PORT) {
-    console.log(`app listenning on port ${config.PORT}`);
-  } else {
-    console.log("app listenning on port 3030");
-  }
+app.listen(secrets.SERVER_PORT, () => {
+  console.log(
+    `Web Server listenning on port ${secrets.SERVER_PORT} in "${
+      secrets.NODE_ENV
+    }" mode`
+  );
 });
-
-/* database connection */
-mongoose.connect(
-  config.MONGO_DB.MONGO_LOCAL_URI || config.MONGO_DB.MONGO_CLOUD_URI,
-  { useNewUrlParser: true },
-  err => {
-    if (err) {
-      console.log(`DB Connection failed:${err}`);
-    } else {
-      console.log("DB Connection Success");
-    }
-  }
-);
