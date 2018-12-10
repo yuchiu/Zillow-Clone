@@ -7,7 +7,7 @@ import compression from "compression";
 import bodyParser from "body-parser";
 
 import apiV1Routes from "./router/apiV1";
-import { secrets } from "./utils";
+import { SERVER_PORT, NODE_ENV } from "./utils/secrets";
 
 const app = express();
 
@@ -27,10 +27,8 @@ app.use(bodyParser.json());
 app.use("/api/v1", apiV1Routes);
 
 /* listen to port */
-app.listen(secrets.SERVER_PORT, () => {
+app.listen(SERVER_PORT, () => {
   console.log(
-    `Web Server listenning on port ${secrets.SERVER_PORT} in "${
-      secrets.NODE_ENV
-    }" mode`
+    `Web Server listenning on port ${SERVER_PORT} in "${NODE_ENV}" mode`
   );
 });

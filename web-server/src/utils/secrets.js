@@ -38,11 +38,8 @@ if (process.env.WEB_SERVER_PORT) {
 }
 export const SERVER_PORT = server_port;
 
-export const JWT_SECRET = process.env.JWT_SECRET;
+export const { SERVICE_USER_URL } = process.env;
+export const { SERVICE_USER_PORT } = process.env;
 
-export default {
-  NODE_ENV,
-  SERVER_URL,
-  SERVER_PORT,
-  JWT_SECRET
-};
+export const { SERVICE_REAL_ESTATE_URL } = process.env;
+export const { SERVICE_REAL_ESTATE_PORT } = process.env;
