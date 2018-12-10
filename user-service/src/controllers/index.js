@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const registerRule = require("../middlewares/registerRule");
+
 const User = require("../models/User");
 
 const jwtSignUser = user => {
@@ -28,6 +30,16 @@ const userController = {
     try {
       const credentials = args;
       let response;
+
+      /* check is register format is correct */
+      const credentialsError = registerRule(credentials);
+      // return error message if there's any errors
+      if (credentialsError) {
+        response = credentialsError;
+        callback(null, response);
+        return;
+      }
+
       const isUsernameRegistered = await User.findOne({
         username: credentials.username
       });
@@ -42,6 +54,7 @@ const userController = {
           }
         };
         callback(null, response);
+        return;
       }
 
       const isEmailRegistered = await User.findOne({
@@ -58,6 +71,7 @@ const userController = {
           }
         };
         callback(null, response);
+        return;
       }
 
       /* credential is validated */
@@ -100,6 +114,7 @@ const userController = {
           }
         };
         callback(null, response);
+        return;
       }
 
       /* validate password */
@@ -118,6 +133,7 @@ const userController = {
           }
         };
         callback(null, response);
+        return;
       }
 
       /* password is validated */
