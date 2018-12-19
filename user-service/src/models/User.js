@@ -7,7 +7,6 @@ const UserSchema = new Schema({
     type: String,
     default: "",
     required: true,
-    unique: true,
     lowercase: true,
     maxlength: 255
   },

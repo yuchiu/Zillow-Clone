@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const registerRule = require("../middlewares/registerRule");
+const registerRule = require("../utils/registerRule");
 
 const User = require("../models/User");
 
@@ -100,7 +100,7 @@ const userController = {
   async signInUser(credentials, callback) {
     try {
       let response;
-      const user = await User.findOne({ username: credentials.username });
+      const user = await User.findOne({ email: credentials.email });
 
       /* user not registered */
       if (!user) {
@@ -108,9 +108,7 @@ const userController = {
           meta: {
             type: "error",
             status: 403,
-            message: `this account ${
-              credentials.username
-            } is not yet registered`
+            message: `this account ${credentials.email} is not yet registered`
           }
         };
         callback(null, response);
