@@ -1,20 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "./index.scss";
+
 const NotFoundPage = ({
   match: {
     params: { unfoundLocation }
   }
 }) => (
-  <React.Fragment>
-    <main className="not-found-page">
-      <p>404! The page `{unfoundLocation}` is not found.</p>
-    </main>
-  </React.Fragment>
+  <div className="not-found-page page-wrapper">
+    <p>Oops... location "{unfoundLocation}" is not found.</p>
+  </div>
 );
 
 NotFoundPage.propTypes = {
-  unfoundLocation: PropTypes.object.isRequired
+  unfoundLocation: PropTypes.object
 };
 
 export default NotFoundPage;

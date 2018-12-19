@@ -1,16 +1,22 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
+import "./index.scss";
+import { Footer, Navbar } from "./common";
 import LandingPage from "./LandingPage";
 import NotFoundPage from "./NotFoundPage";
 
-export default () => (
-  <BrowserRouter>
+const Router = () => (
+  <HashRouter>
     <React.Fragment>
+      <Navbar />
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route component={NotFoundPage} />
+        <Route exact path="/:unfoundLocation" component={NotFoundPage} />
       </Switch>
+      <Footer />
     </React.Fragment>
-  </BrowserRouter>
+  </HashRouter>
 );
+
+export default Router;
