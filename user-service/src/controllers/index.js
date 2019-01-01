@@ -16,8 +16,9 @@ const jwtSignUser = user => {
     console.log(err);
   }
 };
-const userSummary = user => {
+const normalizeUser = user => {
   const summary = {
+    id: user.id,
     username: user.username,
     email: user.email,
     timestamp: user.timestamp
@@ -26,6 +27,47 @@ const userSummary = user => {
 };
 
 const userController = {
+  async authenticateJWT(args, callback) {
+    try {
+      let response;
+      const user = await User.findOne({
+        where: { id: args.id },
+        raw: true
+      });
+      if (!user) {
+        response = {
+          meta: {
+            type: "error",
+            status: 403,
+            message: "not authenticated"
+          },
+          verified: false
+        };
+        callback(null, response);
+        return;
+      }
+
+      response = {
+        meta: {
+          type: "success",
+          status: 200,
+          message: ""
+        },
+        user: normalizeUser(user),
+        verified: true
+      };
+      callback(null, response);
+    } catch (err) {
+      console.log(err);
+      callback(null, {
+        meta: {
+          type: "error",
+          status: 500,
+          message: "server error"
+        }
+      });
+    }
+  },
   async signUpUser(args, callback) {
     try {
       const credentials = args;
@@ -83,7 +125,7 @@ const userController = {
           status: 200,
           message: ""
         },
-        user: userSummary(user),
+        user: normalizeUser(user),
         token: jwtSignUser(user)
       };
       callback(null, response);
@@ -141,7 +183,7 @@ const userController = {
           status: 200,
           message: ""
         },
-        user: userSummary(user),
+        user: normalizeUser(user),
         token: jwtSignUser(user)
       };
       callback(null, response);
@@ -164,7 +206,7 @@ const userController = {
         status: 200,
         message: ""
       },
-      user: userSummary(user)
+      user: normalizeUser(user)
     };
     callback(null, response);
   }

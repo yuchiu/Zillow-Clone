@@ -14,8 +14,6 @@
   - persisted database
 - [Tensorflow](https://github.com/tensorflow/tensorflow)
   - machine learning
-- [Docker](https://github.com/docker)
-  - containerization
 
 ---
 
@@ -38,21 +36,18 @@
 
 #### Tools & Versions
 
-| Tools                                  | Versions   |
-| -------------------------------------- | ---------- |
-| npm                                    | 6.1.0      |
-| pip                                    | 9.0.1      |
-| nodejs                                 | 10.7.0     |
-| python                                 | 3.6.5      |
-| mongodb                                | mlab       |
-| rabbitmq                               | cloudamqp  |
-| **Optional for production deployment** |
-| docker                                 | 18.06.1-ce |
-| docker-compose                         | 1.22.0     |
+| Tools    | Versions  |
+| -------- | --------- |
+| npm      | 6.1.0     |
+| pip      | 9.0.1     |
+| nodejs   | 10.7.0    |
+| python   | 3.6.5     |
+| mongodb  | mlab      |
+| rabbitmq | cloudamqp |
 
 ### Building Data Pipeline
 
-#### Data Fetcher
+#### Data Pipeline
 
 - install dependencies
 
@@ -63,7 +58,7 @@ pip install -r requirements.txt
 - start scraper pipeline for fetching raw data from Zillow, process and store to MongoDB
 
 ```terminal
-cd Zillow-Clone/data-fetcher
+cd Zillow-Clone/data-pipeline
 python3 fetcher.py
 ```
 

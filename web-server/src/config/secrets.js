@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import fs from "fs";
-import logger from "./logger";
+import logger from "../utils/logger";
 
 if (fs.existsSync("../.env")) {
   logger.debug("Using .env file to supply config environment variables");
@@ -40,6 +40,8 @@ export const SERVER_PORT = server_port;
 
 export const { SERVICE_USER_URL } = process.env;
 export const { SERVICE_USER_PORT } = process.env;
+export const { SERVICE_USER_HOST } = process.env;
 
 export const { SERVICE_REAL_ESTATE_URL } = process.env;
 export const { SERVICE_REAL_ESTATE_PORT } = process.env;
+export const { SERVICE_REAL_ESTATE_HOST } = process.env;

@@ -1,4 +1,4 @@
-import { userService } from "../config/rpcClient.config";
+import { userService } from "../config/serviceClient.config";
 
 const userController = {
   signUpUser: (req, res) => {
