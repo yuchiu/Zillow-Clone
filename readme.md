@@ -29,12 +29,7 @@
 
 ## Getting Started
 
-### Prerequisites
-
-**!important** .env file is required for setting up environment variables for this project  
- an example of default .env file is located at ./.env
-
-#### Tools & Versions
+### Tools & Versions
 
 | Tools    | Versions  |
 | -------- | --------- |
@@ -44,6 +39,31 @@
 | python   | 3.6.5     |
 | mongodb  | mlab      |
 | rabbitmq | cloudamqp |
+
+### Prerequisites
+
+#### Environment Variables
+
+**!important** .env file is required for setting up environment variables for this project  
+ an example of default .env file is located at ./.env
+
+- User Service
+
+  - SERVICE_USER_DB_MONGO_URI is part of mLab service's variable, please change to your own
+
+- Message Queues
+
+  - MQ_REAL_ESTATE_FETCH_TASK_URI is part of cloudAMQP service's variable, please change to your own
+  - MQ_REAL_ESTATE_FETCH_TASK_NAME is part of cloudAMQP service's variable, please change to your own
+
+- Property Service
+
+  - SERVICE_PROPERTY_DB_MONGO_URI is part of mLab service's variable, please change to your own
+  - SERVICE_PROPERTY_DB_MONGO_HOST is part of mLab service's variable, please change to your own
+  - SERVICE_PROPERTY_DB_MONGO_PORT is part of mLab service's variable, please change to your own
+  - SERVICE_PROPERTY_DB_MONGO_NAME is part of mLab service's variable, please change to your own
+  - SERVICE_PROPERTY_DB_MONGO_USER is part of mLab service's variable, please change to your own
+  - SERVICE_PROPERTY_DB_MONGO_PASS is part of mLab service's variable, please change to your own
 
 ### Building Data Pipeline
 

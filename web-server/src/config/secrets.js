@@ -42,6 +42,6 @@ export const { SERVICE_USER_URL } = process.env;
 export const { SERVICE_USER_PORT } = process.env;
 export const { SERVICE_USER_HOST } = process.env;
 
-export const { SERVICE_REAL_ESTATE_URL } = process.env;
-export const { SERVICE_REAL_ESTATE_PORT } = process.env;
-export const { SERVICE_REAL_ESTATE_HOST } = process.env;
+export const { SERVICE_PROPERTY_URL } = process.env;
+export const { SERVICE_PROPERTY_PORT } = process.env;
+export const { SERVICE_PROPERTY_HOST } = process.env;
