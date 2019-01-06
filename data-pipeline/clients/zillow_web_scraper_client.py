@@ -4,6 +4,7 @@ import sys
 import random
 from lxml import html
 
+
 """ setup user agent """
 USER_AGENTS_FILE = os.path.join(
     os.path.dirname(__file__), 'user_agents.txt')
@@ -47,7 +48,27 @@ def get_property_by_zpid(zpid):
         tree = html.fromstring(response.content)
     except Exception:
         return {}
+
+    address = tree.xpath('''//title/text()''')
+    if len(address) == 0:
+        address = ''
+    else:
+        address = address[0]
+        address = address.strip(' | Zillow')
+        street_address = address.split(',')[0].strip(', ')
+        city = address.split(',')[1].strip(', ')
+        state = address.split(',')[2].split(' ')[1].strip(', ')
+        zipcode = address.split(',')[2].split(' ')[2].strip(', ')
+
     print(response.content)
+    return {
+        'zpid': zpid,
+        'address': address,
+        'street_address': street_address,
+        'city': city,
+        'state': state,
+        'zipcode': zipcode
+    }
 
 
 """ get similiar property for sale"""
