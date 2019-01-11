@@ -5,13 +5,13 @@ import os
 import time
 import json
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), './', 'clients'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'clients'))
 
 import mongodb_client  # pylint: disable=E0401
-import zillow_web_scraper_client  # pylint: disable=E0401
+import zillow_scraper  # pylint: disable=E0401
 from cloudAMQP_client import CloudAMQPClient  # pylint: disable=E0401
 
-dotenv_path = join(os.path.dirname(__file__), '..', '.env')
+dotenv_path = join(os.path.dirname(__file__), '..', '..', '.env')
 load_dotenv(dotenv_path)
 
 MQ_REAL_ESTATE_FETCH_TASK_URI = os.environ.get(
@@ -35,12 +35,12 @@ def handle_message(msg):
     task = json.loads(msg)
 
     # zpid is Zillow's unique id for real estate property
-    if(not isinstance(task, dict) or
-    not 'zpid' in task or
-       task['zpid'] is None):
+    if(not isinstance(task, dict)
+    or not 'zpid' in task
+       or task['zpid'] is None):
         zpid = task['zpid']
         # Scrape zillow for details
-        property_detail = zillow_web_scraper_client.get_property_by_zpid(zpid)
+        property_detail = zillow_scraper.get_property_by_zpid(zpid)
 
         # update database
         db = mongodb_client.getDB()
@@ -49,7 +49,7 @@ def handle_message(msg):
 
         if FETCH_SIMILIAR_PROPERTIES:
             # get its similiar property's zpid
-            similiar_zpids = zillow_web_scraper_client.get_similiar_properties_for_sale_by_id(
+            similiar_zpids = zillow_scraper.get_similiar_properties_for_sale_by_id(
                 zpid)
 
             # generate tasks for similar zpids

@@ -3,6 +3,7 @@ import os
 import sys
 import random
 from lxml import html
+from zillow_parser import parse_zillow_details  # pylint: disable=E0401
 
 
 """ setup user agent """
@@ -44,35 +45,15 @@ def get_property_by_zpid(zpid):
     response = session_requests.get(request_url, headers=_get_headers())
     print(response)
 
-    try:
-        tree = html.fromstring(response.content)
-    except Exception:
-        return {}
+    tree = html.fromstring(response.content)
+    data = parse_zillow_details(tree)
 
-    address = tree.xpath('''//title/text()''')
-    if len(address) == 0:
-        address = ''
-    else:
-        address = address[0]
-        address = address.strip(' | Zillow')
-        street_address = address.split(',')[0].strip(', ')
-        city = address.split(',')[1].strip(', ')
-        state = address.split(',')[2].split(' ')[1].strip(', ')
-        zipcode = address.split(',')[2].split(' ')[2].strip(', ')
-
-    print(response.content)
-    return {
-        'zpid': zpid,
-        'address': address,
-        'street_address': street_address,
-        'city': city,
-        'state': state,
-        'zipcode': zipcode
-    }
+    print(data)
+    return data
 
 
 """ get similiar property for sale"""
 
 
 def get_similiar_properties_for_sale_by_id(zpid):
-    pass
+    return {}
