@@ -18,4 +18,4 @@ client = CloudAMQPClient(
     MQ_REAL_ESTATE_FETCH_TASK_URI, MQ_REAL_ESTATE_FETCH_TASK_NAME)
 
 
-client.sendMessage({'name': 'test message'})
+client.sendMessage({'zpid': '30691509'})
